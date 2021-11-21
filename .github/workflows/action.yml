@@ -14,10 +14,9 @@ jobs:
       - name: 'Install jq comand'
         run: sudo apt-get install jq
       - name: 'Run shell'
-        shell: bash
+        # shell: bash
         env:
           waka_user_id: ${{ secrets.WAKA_USER_ID }}
           waka_access_token: ${{ secrets.WAKA_ACCESS_TOKEN }}
           feishu_bot_token: ${{ secrets.FEISHU_BOT_TOKEN }}
-        run: |
-          wakatime-robot.sh "$waka_user_id" "$waka_access_token" "$feishu_bot_token"
+        run: bash ./wakatime-robot.sh "$waka_user_id" "$waka_access_token" "$feishu_bot_token"
