@@ -3,7 +3,7 @@ name: 'GitHub Actions WakaTime robot'
 on:
   push:
   schedule:
-    - cron: '* 0/5 * * *'
+    - cron: '0/10 * * * * '
 
 jobs:
   bot:
