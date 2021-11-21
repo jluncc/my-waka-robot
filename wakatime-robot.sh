@@ -3,7 +3,7 @@
 range='Yesterday'
 
 waka_summaries_response=$(curl --location \
-  --request GET "https://wakatime.com/api/v1/users/340fabaa-1b85-4d7f-88a5-df806b83ff09/summaries?range=${range}" \
+  --request GET "https://wakatime.com/api/v1/users/${waka_user_id}/summaries?range=${range}" \
   --header "Authorization: Bearer ${waka_access_token}")
 
 date=`echo "$waka_summaries_response" | jq '.data[0].range.date' | sed  's:":'':g'`

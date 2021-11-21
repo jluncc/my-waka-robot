@@ -16,5 +16,6 @@ jobs:
       - name: 'Run shell'
         run: bash ./wakatime-robot.sh
         with:
+          waka_user_id: ${{ secrets.WAKA_USER_ID }}
           waka_access_token: ${{ secrets.WAKA_ACCESS_TOKEN }}
           feishu_bot_token: ${{ secrets.FEISHU_BOT_TOKEN }}
