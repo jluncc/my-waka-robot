@@ -3,7 +3,7 @@ name: 'GitHub Actions WakaTime robot'
 on:
   push:
   schedule:
-    - cron: '0/10 * * * * '
+    - cron: '0 1 * * * '
 
 jobs:
   bot:
@@ -14,7 +14,6 @@ jobs:
       - name: 'Install jq comand'
         run: sudo apt-get install jq
       - name: 'Run shell'
-        # shell: bash
         env:
           waka_user_id: ${{ secrets.WAKA_USER_ID }}
           waka_access_token: ${{ secrets.WAKA_ACCESS_TOKEN }}

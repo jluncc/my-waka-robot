@@ -17,7 +17,7 @@ context_msg=''
 for((i=0; i<=$project_num-1; i=i+1))
 do 
   project_name=`echo "$projects" | jq '.['${i}'].name' | sed  's:":'':g'`
-  spend_time=`echo "$projects" | jq '.['${i}'].text' | sed  's:":'':g'`
+  spend_time=`echo "$projects" | jq '.['${i}'].text' | sed 's:hr:'小时':g' | sed 's:mins:'分钟':g' | sed  's:":'':g'`
   time_percent=`echo "$projects" | jq '.['${i}'].percent' | sed  's:":'':g'`
   context_msg=$context_msg\\n`echo $project_name \| $spend_time \| $time_percent%`
 done
