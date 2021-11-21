@@ -1,0 +1,20 @@
+name: 'GitHub Actions WakaTime robot'
+
+on:
+  push:
+  schedule:
+    - cron: '* 0/5 * * *'
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@master
+      - name: 'Install jq comand'
+        uses: sudo apt-get install jq
+      - name: 'Run shell'
+        run: bash ./wakatime-robot.sh
+        with:
+          waka_access_token: ${{ secrets.WAKA_ACCESS_TOKEN }}
+          feishu_bot_token: ${{ secrets.FEISHU_BOT_TOKEN }}
