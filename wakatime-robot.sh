@@ -9,15 +9,18 @@ waka_summaries_response=$(curl --location \
 date=`echo "$waka_summaries_response" | jq '.data[0].range.date' | sed  's:":'':g'`
 echo $date
 
+total_code_time=`echo "$waka_summaries_response" | jq '.cummulative_total.text'`
+# echo $total_code_time
+
 projects=`echo "$waka_summaries_response" | jq '.data[0].projects'`
 project_num=`echo "$projects" | jq 'length'`
 # echo $project_num
 
-context_msg=''
+context_msg='all project | '$total_code_time
 for((i=0; i<=$project_num-1; i=i+1))
 do 
   project_name=`echo "$projects" | jq '.['${i}'].name' | sed  's:":'':g'`
-  spend_time=`echo "$projects" | jq '.['${i}'].text' | sed 's:hr:'小时':g' | sed 's:mins:'分钟':g' | sed  's:":'':g'`
+  spend_time=`echo "$projects" | jq '.['${i}'].text' | sed  's:":'':g'`
   time_percent=`echo "$projects" | jq '.['${i}'].percent' | sed  's:":'':g'`
   context_msg=$context_msg\\n`echo $project_name \| $spend_time \| $time_percent%`
 done
