@@ -16,7 +16,7 @@ projects=`echo "$waka_summaries_response" | jq '.data[0].projects'`
 project_num=`echo "$projects" | jq 'length'`
 # echo $project_num
 
-context_msg='all project | '$total_code_time
+context_msg="all project | "$total_code_time
 for((i=0; i<=$project_num-1; i=i+1))
 do 
   project_name=`echo "$projects" | jq '.['${i}'].name' | sed  's:":'':g'`
