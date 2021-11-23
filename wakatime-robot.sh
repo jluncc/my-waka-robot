@@ -9,14 +9,14 @@ waka_summaries_response=$(curl --location \
 date=`echo "$waka_summaries_response" | jq '.data[0].range.date' | sed  's:":'':g'`
 echo $date
 
-total_code_time=`echo "$waka_summaries_response" | jq '.cummulative_total.text'`
-# echo $total_code_time
+total_code_time="all project | "`echo "$waka_summaries_response" | jq '.cummulative_total.text' | sed  's:":'':g'`
+echo $total_code_time
 
 projects=`echo "$waka_summaries_response" | jq '.data[0].projects'`
 project_num=`echo "$projects" | jq 'length'`
 # echo $project_num
 
-context_msg="all project | "$total_code_time
+context_msg=''
 for((i=0; i<=$project_num-1; i=i+1))
 do 
   project_name=`echo "$projects" | jq '.['${i}'].name' | sed  's:":'':g'`
@@ -40,6 +40,16 @@ feishu_api_data='{
                 },
                 "img_key": "img_v2_927db8cf-d788-4a9b-a6ed-3f04bbde9cbg",
                 "tag": "img"
+            },
+            {
+                "tag": "div",
+                "text": {
+                    "content": "===total_code_time===",
+                    "tag": "lark_md"
+                }
+            },
+            {
+                "tag": "hr"
             },
             {
                 "tag": "div",
@@ -74,6 +84,7 @@ feishu_api_data='{
 }'
 
 feishu_api_data=${feishu_api_data/'===date==='/${date}}
+feishu_api_data=${feishu_api_data/'===total_code_time==='/${total_code_time}}
 feishu_api_data=${feishu_api_data/'==context_msg=='/${context_msg}}
 # echo $feishu_api_data
 
