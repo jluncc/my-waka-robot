@@ -103,8 +103,7 @@ qywxMessage='{
         "content": "
             ## ===date=== 编程时间回顾\n 
 
-===total_code_time===\n\n
-            ------
+===total_code_time===\n
             ==context_msg==\n
             > [查看 waka time dashboard](https://wakatime.com/dashboard)"
     }
