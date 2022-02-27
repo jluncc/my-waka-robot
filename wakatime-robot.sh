@@ -91,9 +91,9 @@ feishu_api_data=${feishu_api_data/'==context_msg=='/${context_msg}}
 # echo $feishu_api_data
 
 # 4.发送飞书消息
-curl --location --request POST "https://open.feishu.cn/open-apis/bot/v2/hook/${feishu_bot_token}" \
---header 'Content-Type: application/json' \
---data-raw "${feishu_api_data}"
+# curl --location --request POST "https://open.feishu.cn/open-apis/bot/v2/hook/${feishu_bot_token}" \
+# --header 'Content-Type: application/json' \
+# --data-raw "${feishu_api_data}"
 
 
 # 5.构造企业微信消息结构体
@@ -102,9 +102,9 @@ qywxMessage='{
     "markdown": {
         "content": "
             ## ===date=== 编程时间回顾\n 
-            ### 总耗时\n\n
+
 ===total_code_time===\n\n
-            ### 各项目耗时\n
+            ------
             ==context_msg==\n
             > [查看 waka time dashboard](https://wakatime.com/dashboard)"
     }
