@@ -11,7 +11,7 @@ waka_summaries_response=$(curl --location \
 date=`echo "$waka_summaries_response" | jq '.data[0].range.date' | sed  's:":'':g'`
 echo $date
 
-total_code_time="all project | "`echo "$waka_summaries_response" | jq '.cummulative_total.text' | sed  's:":'':g'`
+total_code_time="all project | "`echo "$waka_summaries_response" | jq '.cumulative_total.text' | sed  's:":'':g'`
 echo $total_code_time
 
 projects=`echo "$waka_summaries_response" | jq '.data[0].projects'`
