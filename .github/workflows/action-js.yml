@@ -1,0 +1,28 @@
+name: 'GitHub Actions WakaTime robot(JS)'
+
+on:
+  push:
+  schedule:
+    # 国际标准时间22点（北京时间早上6点）
+    - cron: '0 22 * * * '
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout codes'
+        uses: actions/checkout@master
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: Install dependencies
+        run: npm install
+      - name: Send WakaTime summary
+        env:
+          WAKA_USER_ID: ${{ secrets.WAKA_USER_ID }}
+          WAKA_ACCESS_TOKEN: ${{ secrets.WAKA_ACCESS_TOKEN }}
+          FEISHU_BOT_TOKEN: ${{ secrets.FEISHU_BOT_TOKEN }}
+          QYWX_BOT_TOKEN: ${{ secrets.QYWX_BOT_TOKEN }}
+        run: |
+          node wakatime-robot.js
